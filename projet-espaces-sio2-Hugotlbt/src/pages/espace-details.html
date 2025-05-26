@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <title>Détails de l'espace</title>
+    <style>
+        .equipment-badge {
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        #loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+        }
+        .space-info {
+            margin-bottom: 20px;
+        }
+        .space-info i {
+            margin-right: 8px;
+            color: #0d6efd;
+        }
+        .back-button {
+            margin-bottom: 20px;
+        }
+        .reservation-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+    <div class="back-button">
+        <a href="espaces.html" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Retour à la liste
+        </a>
+    </div>
+    
+    <div id="auth-alert" class="alert alert-warning" style="display: none;">
+        <p>Vous devez être connecté pour voir les détails de cet espace.</p>
+        <a href="connexion.html" class="btn btn-primary">Se connecter</a>
+    </div>
+    
+    <div id="loading-spinner">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Chargement...</span>
+        </div>
+    </div>
+    
+    <div id="error-container" class="alert alert-danger" style="display: none;"></div>
+    
+    <div id="espace-details" style="display: none;">
+        <h1 id="espace-nom" class="mb-4"></h1>
+        
+        <div class="row">
+            <div class="col-md-8">
+                <div class="space-info">
+                    <h3>Description</h3>
+                    <p id="espace-description" class="lead"></p>
+                </div>
+                
+                <div class="space-info">
+                    <h3>Équipements</h3>
+                    <div id="espace-equipements" class="mt-2"></div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Informations</h5>
+                        <div class="space-info">
+                            <p><i class="bi bi-people-fill"></i> <span id="espace-capacite"></span> personnes</p>
+                        </div>
+                        
+                        <div class="reservation-section">
+                            <h5>Réservation</h5>
+                            <form id="reservation-form">
+                                <div class="mb-3">
+                                    <label for="reservation-date" class="form-label">Date de la réunion</label>
+                                    <input type="date" class="form-control" id="reservation-date" required>
+                                    <div class="invalid-feedback" id="date-feedback">Veuillez sélectionner une date future.</div>
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="reservation-start" class="form-label">Heure de début</label>
+                                        <input type="time" class="form-control" id="reservation-start" required>
+                                        <div class="invalid-feedback" id="start-feedback">Veuillez sélectionner une heure de début.</div>
+                                    </div>
+                                    <div class="col">
+                                        <label for="reservation-end" class="form-label">Heure de fin</label>
+                                        <input type="time" class="form-control" id="reservation-end" required>
+                                        <div class="invalid-feedback" id="end-feedback">L'heure de fin doit être postérieure à l'heure de début.</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="alert alert-danger" id="conflict-alert" style="display: none;">
+                                    Conflit de réservation: cet espace est déjà réservé pour cette période.
+                                </div>
+                                
+                                <button type="submit" id="reservation-btn" class="btn btn-success w-100">
+                                    Réserver cet espace
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../js/espace-details.js"></script>
+</body>
+</html>
